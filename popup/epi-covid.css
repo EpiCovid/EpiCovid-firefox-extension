@@ -1,0 +1,11 @@
+#main {
+  background-color: white;
+}
+
+html, body {
+  margin: 0;
+}
+
+.content {
+  border: 1px solid black;
+}

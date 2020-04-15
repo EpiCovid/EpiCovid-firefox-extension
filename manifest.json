@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "EpiCovid",
+	"version": "1.0",
+	"description": "This add-on consists of the exploitation and visualization in real time of data concerning the Covid-19 pandemic throughout the world.",
+	"homepage_url": "https://github.com/YEP-project1-2019/EpiCovid-firefox-extension",
+	"icons": {
+		"48": "icons/icon.svg"
+	},
+	"permissions": [
+		"activeTab"
+	],
+	"browser_action": {
+		"default_icon": "icons/icon.svg",
+		"default_title": "EpiCovid",
+		"default_popup": "popup/epi-covid.html"
+	}
+}
