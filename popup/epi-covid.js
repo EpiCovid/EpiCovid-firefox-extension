@@ -1,6 +1,6 @@
 // Get all main elements by ID
 const refresh_btn = document.querySelector("#refresh-btn")
-const main_content = document.querySelector("#main-content")
+const main_content = document.querySelector("#content")
 const loader = document.querySelector("#loader")
 
 // Set global variable
@@ -55,7 +55,7 @@ function fillData(data) {
  */
 function fillContent(data) {
   fillData(data)
-  var last_update_content = createContent("content last_update", last_update)
+  var last_update_content = createContent("content last-update", last_update)
   var confirmed_content = createContent("content confirmed", confirmed)
   var death_content = createContent("content death", death)
   var recovered_content = createContent("content recovered", recovered)
@@ -64,10 +64,10 @@ function fillContent(data) {
   for (var i = 0; i != contents.length; i++)
     main_content.removeChild(contents[i])
 
-  main_content.appendChild(last_update_content)
   main_content.appendChild(confirmed_content)
-  main_content.appendChild(recovered_content)
   main_content.appendChild(death_content)
+  main_content.appendChild(recovered_content)
+  main_content.appendChild(last_update_content)
 }
 
 /**
@@ -100,7 +100,7 @@ function updateData() {
   fetch("https://services1.arcgis.com//0MSEUqKaxRlEPj5g/ArcGIS/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?f=json&where=Confirmed+%3E+0&returnGeometry=false&outFields=Confirmed%2C+Last_Update%2C+Recovered%2C+Deaths&orderByFields=Last_Update+desc&resultRecordCount=1000")
     .then((reponse) => reponse.json())
     .then((data) => {
-      loader.setAttribute("class", "")
+      loader.setAttribute("class", "loaded")
       fillContent(data["features"])
     })
     .catch((/* error */) => error = true)

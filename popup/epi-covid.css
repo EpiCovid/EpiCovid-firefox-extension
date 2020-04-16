@@ -1,14 +1,22 @@
 #main {
   background-color: white;
-  width: 200px;
+  width: 250px;
   height: 300px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
+#main-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .loading {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid #454749; /* Blue */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #454749;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -20,6 +28,11 @@
   display: none;
 }
 
+.loaded {
+  width: 100%;
+  height: 100%;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -29,6 +42,33 @@ html, body {
   margin: 0;
 }
 
+#refresh-btn {
+  align-self: flex-end;
+  margin: 5px
+}
+
 .content {
   border: 1px solid black;
+  margin: 5px
+  /* align-self: center; */
+}
+
+.last-update::before {
+  content: "Last Update: "
+}
+
+.last-update {
+  align-self: flex-end;
+}
+
+.confirmed::before {
+  content: "Confirmed : ";
+}
+
+.death::before {
+  content: "Death : ";
+}
+
+.recovered::before {
+  content: "Recovered : ";
 }
