@@ -54,23 +54,48 @@ html, body {
 }
 
 .content {
-  border: 1px solid black;
+  width: 100%;
   align-self: center;
-  margin: 5px;
+  border-width: 10px;
+}
+
+.content::before {
+  padding-left: 10px;
 }
 
 .last-update::before {
+  border-left: 6px solid yellow;
   content: "Last Update: "
 }
 
+.last-update {
+  background-color:rgb(229, 229, 182);
+
+}
+
 .confirmed::before {
+  border-left: 6px solid royalblue;
   content: "Confirmed : ";
+}
+
+.confirmed {
+  background-color: rgb(135, 157, 224);
 }
 
 .death::before {
   content: "Death : ";
+  border-left: 6px solid red;
+}
+
+.death {
+  background-color: rgb(223, 184, 184);
 }
 
 .recovered::before {
+  border-left: 6px solid green;
   content: "Recovered : ";
+}
+
+.recovered {
+  background-color: rgb(144, 221, 144);
 }
