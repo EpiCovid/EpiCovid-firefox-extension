@@ -1,15 +1,17 @@
 const refresh_btn = document.querySelector("#refresh-btn")
 const main_content = document.querySelector("#main-content")
+const loader = document.querySelector("#loader")
 var error = false;
 var last_update = 0;
 var confirmed = 0;
 var death = 0;
 var recovered = 0;
 
-refresh_btn.addEventListener("click", updateData);
 
-function fillContent(data)
-{
+const debouncedUpdateData = debounce(updateData, 500, null);
+refresh_btn.addEventListener("click", debouncedUpdateData);
+
+function fillContent(data) {
   last_update = data[0]["attributes"]["Last_Update"];
   last_update = new Date(last_update).toLocaleTimeString()
   confirmed = 0;
@@ -55,15 +57,33 @@ function fillContent(data)
 }
 
 window.onfocus = start
+
 function start() {
   updateData();
 }
 
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function () {
+    var context = this, args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  }
+}
+
 function updateData() {
+  loader.setAttribute("class", "loading")
   fetch("https://services1.arcgis.com//0MSEUqKaxRlEPj5g/ArcGIS/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?f=json&where=Confirmed+%3E+0&returnGeometry=false&outFields=Confirmed%2C+Last_Update%2C+Recovered%2C+Deaths&orderByFields=Last_Update+desc&resultRecordCount=1000")
-  .then((reponse) => reponse.json())
-  .then((data) => {
-    fillContent(data["features"])
-  })
-  .catch((/* error */) => error = true)
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      loader.setAttribute("class", "")
+      fillContent(data["features"])
+    })
+    .catch((/* error */) => error = true)
 }
